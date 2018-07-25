@@ -443,7 +443,6 @@ In some scenarios is required to have different values. To allow this we provide
 - `nginx.ingress.kubernetes.io/proxy-read-timeout`
 - `nginx.ingress.kubernetes.io/proxy-next-upstream`
 - `nginx.ingress.kubernetes.io/proxy-next-upstream-tries`
-- `nginx.ingress.kubernetes.io/proxy-request-buffering`
 
 ### Proxy redirect
 
@@ -472,10 +471,22 @@ Sets a text that [should be changed in the domain attribute](http://nginx.org/en
 
 To configure this setting globally for all Ingress rules, the `proxy-cookie-domain` value may be set in the [NGINX ConfigMap][configmap].
 
-### Proxy buffering
+### Proxy request buffering
 
-Enable or disable proxy buffering [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering).
-By default proxy buffering is disabled in the NGINX config.
+Enable or disable proxy request buffering [`proxy_request_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering).
+By default proxy request buffering is enabled in the NGINX config.
+
+To configure this setting globally for all Ingress rules, the `proxy-request-buffering` value may be set in the [NGINX ConfigMap][configmap].
+To use custom values in an Ingress rule define these annotation:
+
+```yaml
+nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+```
+
+### Proxy response buffering
+
+Enable or disable proxy response buffering [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering).
+By default proxy response buffering is disabled in the NGINX config.
 
 To configure this setting globally for all Ingress rules, the `proxy-buffering` value may be set in the [NGINX ConfigMap][configmap].
 To use custom values in an Ingress rule define these annotation:
